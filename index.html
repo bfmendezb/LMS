@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- TÍTULO DE LA PÁGINA -->
     <title>Propuesta: EdTech Enterprise SaaS</title>
     
+    <!-- ========================================== -->
+    <!-- METADATOS PARA WHATSAPP Y REDES SOCIALES   -->
+    <!-- ========================================== -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lms.brianmendez.me/">
     <meta property="og:title" content="LMS Next-Gen: Propuesta EdTech Enterprise">
     <meta property="og:description" content="Una solución escalable impulsada por IA para capturar los presupuestos de capacitación del mercado corporativo global.">
+    <!-- RECUERDA: Cambiar esta URL por tu imagen subida (.jpg o .png) -->
     <meta property="og:image" content="https://lms.brianmendez.me/tu-imagen-preview.jpg"> 
     
     <meta name="twitter:card" content="summary_large_image">
@@ -17,6 +22,9 @@
     <meta name="twitter:title" content="LMS Next-Gen: Propuesta EdTech Enterprise">
     <meta name="twitter:description" content="Solución SaaS B2B escalable impulsada por Inteligencia Artificial.">
     <meta name="twitter:image" content="https://lms.brianmendez.me/tu-imagen-preview.jpg">
+    <!-- ========================================== -->
+
+    <!-- Favicon generado dinámicamente con SVG -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300A699'/%3E%3Cstop offset='100%25' stop-color='%230056D2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='20' y='20' width='60' height='60' rx='16' transform='rotate(45 50 50)' fill='url(%23g)'/%3E%3Cpath d='M48 33 L58 48 L49 48 L53 67 L38 50 L48 50 Z' fill='%23FFF'/%3E%3C/svg%3E">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -366,7 +374,7 @@
 
 
         /* ========================================= */
-        /* MEDIA QUERIES MEJORADOS PARA MÓVILES      */
+        /* MEDIA QUERIES SOLUCIÓN PARA MÓVILES       */
         /* ========================================= */
         @media (max-width: 1024px) {
             .glass-card { padding: 3rem 2rem; }
@@ -380,21 +388,34 @@
         }
 
         @media (max-width: 768px) {
-            /* Permitir scroll natural en móviles si el contenido sobrepasa la pantalla */
+            /* 1. DESACTIVAR EL SCROLL SNAPPING MAGNÉTICO PARA EVITAR CORTES */
+            .presentation-container {
+                height: auto; 
+                overflow-y: visible;
+                scroll-snap-type: none; /* ¡Esta es la regla clave! */
+            }
+            body {
+                overflow-y: auto; /* Permitir scrolleo natural */
+            }
+            
+            /* 2. AJUSTAR ALINEACIÓN PARA QUE NO SE RECORTE POR ARRIBA */
             section.slide {
-                padding: 1rem;
                 height: auto;
                 min-height: 100vh;
-                padding-top: 3rem;
-                padding-bottom: 3rem;
+                padding: 1rem;
+                align-items: flex-start; /* Fuerza a las tarjetas largas a empezar desde el borde superior, no desde el centro */
             }
+            
+            /* 3. OPTIMIZAR TARJETAS Y TEXTOS PARA QUE RESPIREN */
             .glass-card { 
-                padding: 2.5rem 1.5rem; 
+                padding: 2.5rem 1.25rem 4rem 1.25rem; /* Extra padding abajo para que no estorbe el "02/06" */
                 border-radius: 24px;
+                margin: 1rem 0;
             }
+            
+            .slide-title { font-size: 2rem; margin-bottom: 2rem; text-align: center; }
             .hero-layout h1 { font-size: 2.25rem; }
             .hero-layout p { font-size: 1.05rem; }
-            .slide-title { font-size: 2rem; margin-bottom: 2rem; }
             
             .feature-row {
                 flex-direction: column;
@@ -402,7 +423,7 @@
                 padding: 1.5rem;
                 gap: 1rem;
             }
-            .feature-row:hover { transform: translateY(-5px); } /* Cambio de X a Y en móvil */
+            .feature-row:hover { transform: translateY(-5px); } 
             
             .compare-box { padding: 1.5rem; }
             .compare-list li { font-size: 1rem; }
@@ -413,12 +434,13 @@
             
             .mini-card { flex-direction: column; text-align: center; gap: 0.5rem; padding: 1.5rem; }
             
-            .roadmap-step { flex-direction: column; align-items: center; text-align: center; gap: 1rem; }
+            .roadmap-step { flex-direction: column; align-items: center; text-align: center; gap: 1rem; margin-bottom: 2.5rem;}
             .roadmap-step:hover { transform: translateY(-5px); }
             
             .slide-number {
-                bottom: 1rem;
-                right: 1.5rem;
+                bottom: 1.5rem;
+                right: 50%;
+                transform: translateX(50%); /* Centrado en móvil para que se vea más limpio */
                 font-size: 0.75rem;
             }
         }
@@ -434,10 +456,12 @@
 
     <div class="presentation-container">
 
+        <!-- Slide 1 -->
         <section class="slide" id="slide1">
             <div class="glass-card">
                 <div class="content-flex hero-layout">
                     
+                    <!-- ÍCONO PRINCIPAL -->
                     <div class="logo-container reveal-up">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                             <defs>
@@ -459,13 +483,15 @@
             </div>
         </section>
 
+        <!-- Slide 2 -->
         <section class="slide" id="slide2">
             <div class="glass-card">
                 <h2 class="slide-title reveal-up">La Visión en <span class="highlight-teal">30 Segundos</span></h2>
                 <div class="content-flex">
                     <div class="grid-2" style="align-items: center;">
                         
-                        <div class="reveal-up delay-100" style="padding-right: 0;"> <h3 style="font-size: 2.25rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -0.02em;">
+                        <div class="reveal-up delay-100" style="padding-right: 0;">
+                            <h3 style="font-size: 2.25rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -0.02em;">
                                 Un MVP espectacular que atrapa al instante.
                             </h3>
                             <p style="font-size: 1.15rem; margin-bottom: 1.5rem; color: var(--c-text-main);">
@@ -507,6 +533,7 @@
             </div>
         </section>
 
+        <!-- Slide 3 -->
         <section class="slide" id="slide3">
             <div class="glass-card">
                 <h2 class="slide-title reveal-up">Evolución del <span class="highlight">E-Learning Corporativo</span></h2>
@@ -536,6 +563,7 @@
             </div>
         </section>
 
+        <!-- Slide 4 -->
         <section class="slide" id="slide4">
             <div class="glass-card">
                 <h2 class="slide-title reveal-up">El Modelo: <span class="highlight-teal">Ingreso Escalable</span></h2>
@@ -566,6 +594,7 @@
             </div>
         </section>
 
+        <!-- Slide 5 -->
         <section class="slide" id="slide5">
             <div class="glass-card">
                 <h2 class="slide-title reveal-up">Nuestra Ventaja: <span class="highlight">Vibecoding</span></h2>
@@ -603,6 +632,7 @@
             </div>
         </section>
 
+        <!-- Slide 6 -->
         <section class="slide" id="slide6">
             <div class="glass-card">
                 <h2 class="slide-title reveal-up">Roadmap a <span class="highlight-teal">90 Días</span></h2>
@@ -626,8 +656,8 @@
                         </div>
                     </div>
                     
-                    <div class="reveal-up delay-400" style="text-align: center; margin-top: 5rem;">
-                        <button onclick="document.querySelector('.presentation-container').scrollTo({top: 0, behavior: 'smooth'})" style="background: var(--c-text-main); color: #FFF; padding: 1rem 2.5rem; border: none; border-radius: 99px; font-size: 1.125rem; font-weight: 600; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+                    <div class="reveal-up delay-400" style="text-align: center; margin-top: 3rem;">
+                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.querySelector('.presentation-container').scrollTo({top: 0, behavior: 'smooth'});" style="background: var(--c-text-main); color: #FFF; padding: 1rem 2.5rem; border: none; border-radius: 99px; font-size: 1.125rem; font-weight: 600; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
                             Volver al inicio <i class="fa-solid fa-arrow-up" style="margin-left: 8px; font-size: 0.9rem;"></i>
                         </button>
                     </div>
@@ -647,7 +677,7 @@
                     }
                 });
             }, { 
-                threshold: 0.3 
+                threshold: 0.15 /* Reduje un poco el umbral para que las animaciones disparen mejor en móviles */
             });
 
             document.querySelectorAll('.slide').forEach(slide => {
