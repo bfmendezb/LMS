@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- TÍTULO DE LA PÁGINA -->
     <title>Propuesta: EdTech Enterprise SaaS</title>
     
-    <!-- ========================================== -->
-    <!-- METADATOS PARA WHATSAPP Y REDES SOCIALES   -->
-    <!-- ========================================== -->
+    <!-- METADATOS REDES SOCIALES Y WHATSAPP -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lms.brianmendez.me/">
     <meta property="og:title" content="LMS Next-Gen: Propuesta EdTech Enterprise">
     <meta property="og:description" content="Una solución escalable impulsada por IA para capturar los presupuestos de capacitación del mercado corporativo global.">
-    <!-- RECUERDA: Cambiar esta URL por tu imagen subida (.jpg o .png) -->
     <meta property="og:image" content="https://lms.brianmendez.me/tu-imagen-preview.jpg"> 
     
     <meta name="twitter:card" content="summary_large_image">
@@ -22,9 +18,7 @@
     <meta name="twitter:title" content="LMS Next-Gen: Propuesta EdTech Enterprise">
     <meta name="twitter:description" content="Solución SaaS B2B escalable impulsada por Inteligencia Artificial.">
     <meta name="twitter:image" content="https://lms.brianmendez.me/tu-imagen-preview.jpg">
-    <!-- ========================================== -->
 
-    <!-- Favicon generado dinámicamente con SVG -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300A699'/%3E%3Cstop offset='100%25' stop-color='%230056D2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='20' y='20' width='60' height='60' rx='16' transform='rotate(45 50 50)' fill='url(%23g)'/%3E%3Cpath d='M48 33 L58 48 L49 48 L53 67 L38 50 L48 50 Z' fill='%23FFF'/%3E%3C/svg%3E">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,30 +78,45 @@
             100% { transform: translate(5%, 10%) scale(1.1); }
         }
 
-        /* ----- ANIMACIONES ELEGANTES ----- */
-        .reveal-up {
+        /* ========================================== */
+        /* NUEVO SISTEMA DE ANIMACIÓN AL SCROLLEAR    */
+        /* ========================================== */
+        .scroll-reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity, filter;
+            transition-property: opacity, transform, filter;
+            transition-duration: 0.9s;
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        .slide.in-view .reveal-up {
+
+        /* Efecto: Difuminado hacia nitidez (Texto que se escribe/aparece) */
+        .blur-in {
+            filter: blur(12px);
+            transform: translateY(30px) scale(0.98);
+        }
+        .blur-in.is-visible {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0) scale(1);
+        }
+
+        /* Efecto: Deslizamiento suave hacia arriba (Para tarjetas/iconos) */
+        .fade-up {
+            transform: translateY(40px);
+        }
+        .fade-up.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
+        /* Retrasos en cascada (para listas y elementos múltiples) */
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
         .delay-400 { transition-delay: 400ms; }
         .delay-500 { transition-delay: 500ms; }
-
-        @keyframes subtle-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 166, 153, 0.3); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 166, 153, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 166, 153, 0); }
-        }
+        .delay-600 { transition-delay: 600ms; }
+        /* ========================================== */
 
         @keyframes float-gentle {
             0% { transform: translateY(0); }
@@ -115,12 +124,17 @@
             100% { transform: translateY(0); }
         }
 
+        @keyframes subtle-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 166, 153, 0.3); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 166, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 166, 153, 0); }
+        }
+
         @keyframes pulse-text {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); text-shadow: 0 10px 30px rgba(0,166,153,0.3); }
             100% { transform: scale(1); }
         }
-        /* ---------------------------------------- */
 
         .presentation-container {
             height: 100vh;
@@ -372,10 +386,6 @@
         .roadmap-step h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--c-text-main); }
         .roadmap-step p { font-size: 1rem; }
 
-
-        /* ========================================= */
-        /* MEDIA QUERIES SOLUCIÓN PARA MÓVILES       */
-        /* ========================================= */
         @media (max-width: 1024px) {
             .glass-card { padding: 3rem 2rem; }
             .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
@@ -388,27 +398,23 @@
         }
 
         @media (max-width: 768px) {
-            /* 1. DESACTIVAR EL SCROLL SNAPPING MAGNÉTICO PARA EVITAR CORTES */
+            /* Desactivar scroll magnético para móviles (solución previa) */
             .presentation-container {
                 height: auto; 
                 overflow-y: visible;
-                scroll-snap-type: none; /* ¡Esta es la regla clave! */
+                scroll-snap-type: none; 
             }
-            body {
-                overflow-y: auto; /* Permitir scrolleo natural */
-            }
+            body { overflow-y: auto; }
             
-            /* 2. AJUSTAR ALINEACIÓN PARA QUE NO SE RECORTE POR ARRIBA */
             section.slide {
                 height: auto;
                 min-height: 100vh;
                 padding: 1rem;
-                align-items: flex-start; /* Fuerza a las tarjetas largas a empezar desde el borde superior, no desde el centro */
+                align-items: flex-start; 
             }
             
-            /* 3. OPTIMIZAR TARJETAS Y TEXTOS PARA QUE RESPIREN */
             .glass-card { 
-                padding: 2.5rem 1.25rem 4rem 1.25rem; /* Extra padding abajo para que no estorbe el "02/06" */
+                padding: 2.5rem 1.25rem 4rem 1.25rem;
                 border-radius: 24px;
                 margin: 1rem 0;
             }
@@ -417,12 +423,7 @@
             .hero-layout h1 { font-size: 2.25rem; }
             .hero-layout p { font-size: 1.05rem; }
             
-            .feature-row {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.5rem;
-                gap: 1rem;
-            }
+            .feature-row { flex-direction: column; text-align: center; padding: 1.5rem; gap: 1rem; }
             .feature-row:hover { transform: translateY(-5px); } 
             
             .compare-box { padding: 1.5rem; }
@@ -440,7 +441,7 @@
             .slide-number {
                 bottom: 1.5rem;
                 right: 50%;
-                transform: translateX(50%); /* Centrado en móvil para que se vea más limpio */
+                transform: translateX(50%);
                 font-size: 0.75rem;
             }
         }
@@ -461,8 +462,7 @@
             <div class="glass-card">
                 <div class="content-flex hero-layout">
                     
-                    <!-- ÍCONO PRINCIPAL -->
-                    <div class="logo-container reveal-up">
+                    <div class="logo-container scroll-reveal blur-in">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                             <defs>
                                 <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -475,9 +475,10 @@
                         </svg>
                     </div>
 
-                    <div class="hero-badge reveal-up delay-100">Propuesta Estratégica B2B</div>
-                    <h1 class="reveal-up delay-200">La Plataforma <span class="highlight">LMS Next-Gen</span></h1>
-                    <p class="reveal-up delay-300" style="max-width: 600px; margin: 0 auto;">Una solución escalable impulsada por IA para capturar los grandes presupuestos de capacitación del mercado Enterprise global.</p>
+                    <!-- Agregamos las clases scroll-reveal, blur-in y fade-up a cada elemento -->
+                    <div class="hero-badge scroll-reveal blur-in delay-100">Propuesta Estratégica B2B</div>
+                    <h1 class="scroll-reveal blur-in delay-200">La Plataforma <span class="highlight">LMS Next-Gen</span></h1>
+                    <p class="scroll-reveal blur-in delay-300" style="max-width: 600px; margin: 0 auto;">Una solución escalable impulsada por IA para capturar los grandes presupuestos de capacitación del mercado Enterprise global.</p>
                 </div>
                 <div class="slide-number">01 / 06</div>
             </div>
@@ -486,24 +487,26 @@
         <!-- Slide 2 -->
         <section class="slide" id="slide2">
             <div class="glass-card">
-                <h2 class="slide-title reveal-up">La Visión en <span class="highlight-teal">30 Segundos</span></h2>
+                <h2 class="slide-title scroll-reveal blur-in">La Visión en <span class="highlight-teal">30 Segundos</span></h2>
                 <div class="content-flex">
                     <div class="grid-2" style="align-items: center;">
                         
-                        <div class="reveal-up delay-100" style="padding-right: 0;">
-                            <h3 style="font-size: 2.25rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -0.02em;">
+                        <div style="padding-right: 0;">
+                            <!-- Los textos ahora se difuminan uno por uno -->
+                            <h3 class="scroll-reveal blur-in delay-100" style="font-size: 2.25rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -0.02em;">
                                 Un MVP espectacular que atrapa al instante.
                             </h3>
-                            <p style="font-size: 1.15rem; margin-bottom: 1.5rem; color: var(--c-text-main);">
+                            <p class="scroll-reveal blur-in delay-200" style="font-size: 1.15rem; margin-bottom: 1.5rem; color: var(--c-text-main);">
                                 Nuestra filosofía: <strong>si el cliente no entiende el valor en 5 segundos, fallamos.</strong>
                             </p>
-                            <p style="font-size: 1.1rem;">
+                            <p class="scroll-reveal blur-in delay-300" style="font-size: 1.1rem;">
                                 No haremos otra plataforma pesada. Construiremos una solución limpia, rápida e intuitiva que las grandes empresas quieran licenciar de inmediato.
                             </p>
                         </div>
                         
                         <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                            <div class="feature-row reveal-up delay-200">
+                            <!-- Las tarjetas suben (fade-up) en cascada -->
+                            <div class="feature-row scroll-reveal fade-up delay-200">
                                 <div class="icon-box bg-rose-light"><i class="fa-solid fa-mobile-screen"></i></div>
                                 <div>
                                     <h4>Mobile-First & IA</h4>
@@ -511,7 +514,7 @@
                                 </div>
                             </div>
 
-                            <div class="feature-row reveal-up delay-300">
+                            <div class="feature-row scroll-reveal fade-up delay-300">
                                 <div class="icon-box bg-teal-light"><i class="fa-solid fa-bolt"></i></div>
                                 <div>
                                     <h4>Gestión Intuitiva</h4>
@@ -519,7 +522,7 @@
                                 </div>
                             </div>
 
-                            <div class="feature-row reveal-up delay-400">
+                            <div class="feature-row scroll-reveal fade-up delay-400">
                                 <div class="icon-box bg-blue-light"><i class="fa-solid fa-file-contract"></i></div>
                                 <div>
                                     <h4>SaaS Escalable</h4>
@@ -536,26 +539,27 @@
         <!-- Slide 3 -->
         <section class="slide" id="slide3">
             <div class="glass-card">
-                <h2 class="slide-title reveal-up">Evolución del <span class="highlight">E-Learning Corporativo</span></h2>
+                <h2 class="slide-title scroll-reveal blur-in">Evolución del <span class="highlight">E-Learning Corporativo</span></h2>
                 <div class="content-flex grid-2">
-                    <div class="compare-box box-old reveal-up delay-100">
+                    <div class="compare-box box-old scroll-reveal blur-in delay-100">
                         <div class="badge-status">El Pasado</div>
                         <h3 style="font-size: 1.75rem; margin-bottom: 0.5rem;">El Modelo Tradicional</h3>
                         <p style="font-size: 1rem;">Plataformas obsoletas y agencias costosas.</p>
                         <ul class="compare-list">
-                            <li><i class="fa-solid fa-xmark text-red"></i> <div><strong>Lento:</strong> Meses para diseñar y montar un solo curso en SCORM.</div></li>
-                            <li><i class="fa-solid fa-xmark text-red"></i> <div><strong>Baja Adopción:</strong> UX aburrida que genera frustración en el empleado.</div></li>
-                            <li><i class="fa-solid fa-xmark text-red"></i> <div><strong>Caja Negra:</strong> RRHH no sabe si la capacitación realmente mejoró el rendimiento.</div></li>
+                            <!-- Los items de la lista aparecen en cascada -->
+                            <li class="scroll-reveal fade-up delay-200"><i class="fa-solid fa-xmark text-red"></i> <div><strong>Lento:</strong> Meses para diseñar y montar un solo curso en SCORM.</div></li>
+                            <li class="scroll-reveal fade-up delay-300"><i class="fa-solid fa-xmark text-red"></i> <div><strong>Baja Adopción:</strong> UX aburrida que genera frustración en el empleado.</div></li>
+                            <li class="scroll-reveal fade-up delay-400"><i class="fa-solid fa-xmark text-red"></i> <div><strong>Caja Negra:</strong> RRHH no sabe si la capacitación realmente mejoró el rendimiento.</div></li>
                         </ul>
                     </div>
-                    <div class="compare-box box-new reveal-up delay-200">
+                    <div class="compare-box box-new scroll-reveal blur-in delay-300">
                         <div class="badge-status">El Futuro</div>
                         <h3 style="font-size: 1.75rem; margin-bottom: 0.5rem; color: var(--c-teal);">AI-Driven LMS (Nosotros)</h3>
                         <p style="font-size: 1rem;">Agilidad, retención y métricas en tiempo real.</p>
                         <ul class="compare-list">
-                            <li><i class="fa-solid fa-check text-green"></i> <div><strong>Express:</strong> Creación automatizada de contenido base mediante agentes de IA.</div></li>
-                            <li><i class="fa-solid fa-check text-green"></i> <div><strong>Microlearning:</strong> UX moderna y móvil, diseñada para mantener la atención del usuario.</div></li>
-                            <li><i class="fa-solid fa-check text-green"></i> <div><strong>Data Predictiva:</strong> Dashboards instantáneos con el ROI de capacitación.</div></li>
+                            <li class="scroll-reveal fade-up delay-400"><i class="fa-solid fa-check text-green"></i> <div><strong>Express:</strong> Creación automatizada de contenido base mediante agentes de IA.</div></li>
+                            <li class="scroll-reveal fade-up delay-500"><i class="fa-solid fa-check text-green"></i> <div><strong>Microlearning:</strong> UX moderna y móvil, diseñada para mantener la atención del usuario.</div></li>
+                            <li class="scroll-reveal fade-up delay-600"><i class="fa-solid fa-check text-green"></i> <div><strong>Data Predictiva:</strong> Dashboards instantáneos con el ROI de capacitación.</div></li>
                         </ul>
                     </div>
                 </div>
@@ -566,22 +570,22 @@
         <!-- Slide 4 -->
         <section class="slide" id="slide4">
             <div class="glass-card">
-                <h2 class="slide-title reveal-up">El Modelo: <span class="highlight-teal">Ingreso Escalable</span></h2>
+                <h2 class="slide-title scroll-reveal blur-in">El Modelo: <span class="highlight-teal">Ingreso Escalable</span></h2>
                 <div class="content-flex grid-2">
-                    <div class="big-number-block reveal-up delay-100">
+                    <div class="big-number-block scroll-reveal blur-in delay-100">
                         <div class="big-number">$100k</div>
                         <div class="big-label">Ticket Anual Promedio (USD)</div>
                         <p style="margin-top: 1rem; font-size: 1rem;">El estándar en contratos del segmento Enterprise para plataformas de capacitación.</p>
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                        <div class="feature-row reveal-up delay-200">
+                        <div class="feature-row scroll-reveal fade-up delay-200">
                             <div class="icon-box bg-rose-light"><i class="fa-solid fa-rocket"></i></div>
                             <div>
                                 <h4>Setup Premium (Gancho)</h4>
                                 <p style="font-size: 0.95rem;">Cobro inicial por personalizar la plataforma (White-label) y migrar los primeros cursos. Genera caja rápida y extrema confianza.</p>
                             </div>
                         </div>
-                        <div class="feature-row reveal-up delay-300">
+                        <div class="feature-row scroll-reveal fade-up delay-300">
                             <div class="icon-box bg-teal-light"><i class="fa-solid fa-infinity"></i></div>
                             <div>
                                 <h4>SaaS Recurrente (El Grueso)</h4>
@@ -597,29 +601,29 @@
         <!-- Slide 5 -->
         <section class="slide" id="slide5">
             <div class="glass-card">
-                <h2 class="slide-title reveal-up">Nuestra Ventaja: <span class="highlight">Vibecoding</span></h2>
+                <h2 class="slide-title scroll-reveal blur-in">Nuestra Ventaja: <span class="highlight">Vibecoding</span></h2>
                 <div class="content-flex grid-2">
-                    <div class="reveal-up delay-100">
-                        <h3 style="font-size: 2rem; margin-bottom: 1.25rem; font-weight: 800;">Construir a costo casi cero.</h3>
-                        <p style="margin-bottom: 1.5rem;">Tradicionalmente, levantar un LMS corporativo requería rondas de inversión millonarias y meses de trabajo de un equipo de ingenieros.</p>
-                        <p>Hoy, utilizando el desarrollo asistido por IA avanzada (Vibecoding), <strong>puedo iterar la arquitectura y programar la plataforma en tiempo récord</strong>. No necesitamos pagar programadores externos; yo asumo la ejecución tecnológica mientras tú defines la calidad del producto comercial.</p>
+                    <div>
+                        <h3 class="scroll-reveal blur-in delay-100" style="font-size: 2rem; margin-bottom: 1.25rem; font-weight: 800;">Construir a costo casi cero.</h3>
+                        <p class="scroll-reveal blur-in delay-200" style="margin-bottom: 1.5rem;">Tradicionalmente, levantar un LMS corporativo requería rondas de inversión millonarias y meses de trabajo de un equipo de ingenieros.</p>
+                        <p class="scroll-reveal blur-in delay-300">Hoy, utilizando el desarrollo asistido por IA avanzada (Vibecoding), <strong>puedo iterar la arquitectura y programar la plataforma en tiempo récord</strong>. No necesitamos pagar programadores externos; yo asumo la ejecución tecnológica mientras tú defines la calidad del producto comercial.</p>
                     </div>
-                    <div class="mini-card-grid reveal-up delay-200">
-                        <div class="mini-card">
+                    <div class="mini-card-grid">
+                        <div class="mini-card scroll-reveal fade-up delay-200">
                             <i class="fa-solid fa-code-branch" style="color: var(--c-blue);"></i>
                             <div>
                                 <strong style="color: var(--c-text-main);">Iteración Ágil</strong>
                                 <p style="font-size: 0.9rem; margin-top: 0.2rem;">Cambios solicitados implementados en horas, no semanas.</p>
                             </div>
                         </div>
-                        <div class="mini-card">
+                        <div class="mini-card scroll-reveal fade-up delay-300">
                             <i class="fa-solid fa-server" style="color: var(--c-teal);"></i>
                             <div>
                                 <strong style="color: var(--c-text-main);">Cloud Económico</strong>
                                 <p style="font-size: 0.9rem; margin-top: 0.2rem;">Costos iniciales de servidores por debajo de $150 USD/mes.</p>
                             </div>
                         </div>
-                        <div class="mini-card">
+                        <div class="mini-card scroll-reveal fade-up delay-400">
                             <i class="fa-solid fa-brain" style="color: var(--c-rose);"></i>
                             <div>
                                 <strong style="color: var(--c-text-main);">APIs Nativas</strong>
@@ -635,28 +639,28 @@
         <!-- Slide 6 -->
         <section class="slide" id="slide6">
             <div class="glass-card">
-                <h2 class="slide-title reveal-up">Roadmap a <span class="highlight-teal">90 Días</span></h2>
+                <h2 class="slide-title scroll-reveal blur-in">Roadmap a <span class="highlight-teal">90 Días</span></h2>
                 <div class="content-flex">
                     <div class="roadmap-container">
-                        <div class="roadmap-line reveal-up"></div>
-                        <div class="roadmap-step reveal-up delay-100">
+                        <div class="roadmap-line scroll-reveal blur-in"></div>
+                        <div class="roadmap-step scroll-reveal fade-up delay-100">
                             <div class="step-dot">1</div>
                             <h3>Mes 1: El Prototipo</h3>
                             <p>Definimos requerimientos y construyo el MVP funcional enfocado en la generación de cursos con IA y la interfaz de usuario.</p>
                         </div>
-                        <div class="roadmap-step reveal-up delay-200">
+                        <div class="roadmap-step scroll-reveal fade-up delay-200">
                             <div class="step-dot">2</div>
                             <h3>Mes 2: Piloto Cero Costo</h3>
                             <p>Buscamos una empresa en tu red y les ofrecemos digitalizar su proceso de <em>Onboarding</em> gratis para crear un caso de éxito sólido.</p>
                         </div>
-                        <div class="roadmap-step reveal-up delay-300">
+                        <div class="roadmap-step scroll-reveal fade-up delay-300">
                             <div class="step-dot">3</div>
                             <h3>Mes 3: Caza Mayor</h3>
                             <p>Con data real de retención y éxito, armamos la oferta comercial para buscar y cerrar nuestros primeros contratos B2B recurrentes.</p>
                         </div>
                     </div>
                     
-                    <div class="reveal-up delay-400" style="text-align: center; margin-top: 3rem;">
+                    <div class="scroll-reveal blur-in delay-400" style="text-align: center; margin-top: 3rem;">
                         <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.querySelector('.presentation-container').scrollTo({top: 0, behavior: 'smooth'});" style="background: var(--c-text-main); color: #FFF; padding: 1rem 2.5rem; border: none; border-radius: 99px; font-size: 1.125rem; font-weight: 600; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
                             Volver al inicio <i class="fa-solid fa-arrow-up" style="margin-left: 8px; font-size: 0.9rem;"></i>
                         </button>
@@ -670,18 +674,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Este script ahora "escucha" cada elemento individualmente en lugar de la tarjeta completa
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    // Cuando el elemento entra en la pantalla, le agregamos la clase que dispara la animación
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('in-view');
+                        entry.target.classList.add('is-visible');
                     }
                 });
             }, { 
-                threshold: 0.15 /* Reduje un poco el umbral para que las animaciones disparen mejor en móviles */
+                threshold: 0.1, // Se activa cuando solo un 10% del texto es visible (hace que responda más rápido al scrollear)
+                rootMargin: "0px 0px -50px 0px" // Dispara un poquito antes de que llegue al fondo real de la pantalla
             });
 
-            document.querySelectorAll('.slide').forEach(slide => {
-                observer.observe(slide);
+            // Buscamos TODOS los textos, botones e iconos que tengan la clase .scroll-reveal
+            document.querySelectorAll('.scroll-reveal').forEach(element => {
+                observer.observe(element);
             });
         });
     </script>
