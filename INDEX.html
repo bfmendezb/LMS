@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta: EdTech Enterprise SaaS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --c-text-main: #222222;
+            --c-text-muted: #717171;
+            --c-rose: #FF385C;    
+            --c-teal: #00A699;    
+            --c-blue: #0056D2;    
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 1);
+            --glass-shadow: 0 24px 48px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+            --border-radius: 32px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--c-text-main);
+            background-color: #F7F7F9;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .mesh-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: #F7F7F9;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .blob-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: var(--c-rose); }
+        .blob-2 { bottom: -20%; right: -10%; width: 70vw; height: 70vw; background: var(--c-teal); animation-delay: -5s; }
+        .blob-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #FFD85D; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, 10%) scale(1.1); }
+        }
+
+        /* ----- NUEVAS ANIMACIONES ELEGANTES ----- */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .slide.in-view .reveal-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        @keyframes subtle-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 166, 153, 0.3); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 166, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 166, 153, 0); }
+        }
+        /* ---------------------------------------- */
+
+        .presentation-container {
+            height: 100vh;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .presentation-container::-webkit-scrollbar { width: 0; background: transparent; }
+
+        section.slide {
+            min-height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            min-height: 80vh;
+            padding: 4rem 5rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 3rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--c-text-muted);
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--c-text-main);
+        }
+
+        .slide-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        .slide-title span.highlight {
+            background: linear-gradient(135deg, var(--c-rose), #FF6B8B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-title span.highlight-teal {
+            background: linear-gradient(135deg, var(--c-teal), #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--c-text-muted);
+        }
+
+        .content-flex {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        
+        .hero-layout { text-align: center; max-width: 800px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 166, 153, 0.1);
+            color: var(--c-teal);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 166, 153, 0.2);
+            animation: subtle-pulse 3s infinite; /* Animación de pulso añadida */
+        }
+        .hero-layout h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.03em; }
+        .hero-layout p { font-size: 1.25rem; }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-row:hover { 
+            transform: translateX(10px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .icon-box {
+            width: 60px; height: 60px; flex-shrink: 0;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .feature-row:hover .icon-box {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        .feature-row:nth-child(1) .icon-box { background: rgba(255, 56, 92, 0.1); color: var(--c-rose); }
+        .feature-row:nth-child(2) .icon-box { background: rgba(0, 166, 153, 0.1); color: var(--c-teal); }
+        .feature-row:nth-child(3) .icon-box { background: rgba(0, 86, 210, 0.1); color: var(--c-blue); }
+
+        .feature-row h4 { font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--c-text-main); }
+        .feature-row p { font-size: 1rem; margin: 0; line-height: 1.4; color: var(--c-text-muted); }
+
+        .compare-box { padding: 2.5rem; border-radius: 24px; height: 100%; transition: transform 0.3s ease; }
+        .compare-box:hover { transform: translateY(-5px); }
+        .box-old { background: #F3F4F6; border: 1px solid #E5E7EB; }
+        .box-new { background: rgba(0, 166, 153, 0.05); border: 1px solid rgba(0, 166, 153, 0.2); box-shadow: 0 10px 30px rgba(0,166,153,0.1); }
+        .compare-list { list-style: none; margin-top: 1.5rem; }
+        .compare-list li { margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 1rem; font-size: 1.125rem; }
+        .compare-list li i { margin-top: 0.25rem; }
+        .text-red { color: #EF4444; }
+        .text-green { color: var(--c-teal); }
+
+        .big-number-block { text-align: center; padding: 3rem; }
+        .big-number {
+            font-size: 5rem;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, var(--c-teal), #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        .big-label { font-size: 1.25rem; font-weight: 600; color: var(--c-text-main); margin-top: 1rem; }
+        
+        .roadmap-container {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            position: relative; padding-top: 2rem;
+        }
+        .roadmap-line {
+            position: absolute; top: 3.5rem; left: 0; width: 100%; height: 2px;
+            background: rgba(0,0,0,0.05); z-index: 1;
+        }
+        .roadmap-step { position: relative; z-index: 2; width: 30%; text-align: center; }
+        .step-dot {
+            width: 3rem; height: 3rem; border-radius: 50%;
+            background: #FFF; border: 3px solid var(--c-teal);
+            margin: 0 auto 1.5rem auto; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: var(--c-teal); box-shadow: 0 4px 12px rgba(0,166,153,0.2);
+            transition: all 0.3s ease;
+        }
+        .roadmap-step:hover .step-dot { transform: scale(1.15); background: var(--c-teal); color: #FFF; }
+        .roadmap-step h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--c-text-main); }
+        .roadmap-step p { font-size: 1rem; }
+
+        @media (max-width: 1024px) {
+            .glass-card { padding: 3rem 2rem; }
+            .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-layout h1 { font-size: 3rem; }
+            .roadmap-container { flex-direction: column; }
+            .roadmap-line { display: none; }
+            .roadmap-step { width: 100%; display: flex; align-items: flex-start; gap: 2rem; text-align: left; margin-bottom: 2rem; }
+            .step-dot { margin: 0; flex-shrink: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mesh-background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="presentation-container">
+
+        <!-- Slide 1 -->
+        <section class="slide" id="slide1">
+            <div class="glass-card">
+                <div class="content-flex hero-layout">
+                    <div class="hero-badge reveal-up">Propuesta Estratégica B2B</div>
+                    <h1 class="reveal-up delay-100">La Plataforma <span class="highlight">LMS Next-Gen</span></h1>
+                    <p class="reveal-up delay-200" style="max-width: 600px; margin: 0 auto;">Una solución escalable impulsada por IA para capturar los grandes presupuestos de capacitación del mercado Enterprise global.</p>
+                </div>
+                <div class="slide-number">01 / 06</div>
+            </div>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide" id="slide2">
+            <div class="glass-card">
+                <h2 class="slide-title reveal-up">La Visión en <span class="highlight-teal">30 Segundos</span></h2>
+                <div class="content-flex">
+                    <div class="grid-2" style="align-items: center;">
+                        <!-- Columna Izquierda -->
+                        <div style="padding-right: 2rem;" class="reveal-up delay-100">
+                            <h3 style="font-size: 2.25rem; line-height: 1.2; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -0.02em;">
+                                Un MVP espectacular que atrapa al instante.
+                            </h3>
+                            <p style="font-size: 1.15rem; margin-bottom: 1.5rem; color: var(--c-text-main);">
+                                Nuestra filosofía: <strong>si el cliente no entiende el valor en 5 segundos, fallamos.</strong>
+                            </p>
+                            <p style="font-size: 1.1rem;">
+                                No haremos otra plataforma pesada. Construiremos una solución limpia, rápida e intuitiva que las grandes empresas quieran licenciar de inmediato.
+                            </p>
+                        </div>
+                        
+                        <!-- Columna Derecha (Features en cascada) -->
+                        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                            <div class="feature-row reveal-up delay-200">
+                                <div class="icon-box"><i class="fa-solid fa-mobile-screen"></i></div>
+                                <div>
+                                    <h4>Mobile-First & IA</h4>
+                                    <p>Aprendizaje ágil en la palma de la mano. Microlearning generado por IA en segundos.</p>
+                                </div>
+                            </div>
+
+                            <div class="feature-row reveal-up delay-300">
+                                <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                                <div>
+                                    <h4>Gestión Intuitiva</h4>
+                                    <p>Despliegue ultra-rápido y una interfaz sin fricciones diseñada para facilitar el trabajo de RRHH.</p>
+                                </div>
+                            </div>
+
+                            <div class="feature-row reveal-up delay-400">
+                                <div class="icon-box"><i class="fa-solid fa-file-contract"></i></div>
+                                <div>
+                                    <h4>SaaS Escalable</h4>
+                                    <p>Modelo puro de licenciamiento B2B. Proveer la infraestructura como servicio para ingresos recurrentes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">02 / 06</div>
+            </div>
+        </section>
+
+        <!-- Slide 3 -->
+        <section class="slide" id="slide3">
+            <div class="glass-card">
+                <h2 class="slide-title reveal-up">Evolución del <span class="highlight">E-Learning Corporativo</span></h2>
+                <div class="content-flex grid-2">
+                    <div class="compare-box box-old reveal-up delay-100">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">El Modelo Tradicional</h3>
+                        <p style="font-size: 0.9rem;">Plataformas obsoletas y agencias costosas.</p>
+                        <ul class="compare-list">
+                            <li><i class="fa-solid fa-xmark text-red"></i> <div><strong>Lento:</strong> Meses para diseñar y montar un solo curso en SCORM.</div></li>
+                            <li><i class="fa-solid fa-xmark text-red"></i> <div><strong>Baja Adopción:</strong> UX aburrida que genera frustración en el empleado.</div></li>
+                            <li><i class="fa-solid fa-xmark text-red"></i> <div><strong>Caja Negra:</strong> RRHH no sabe si la capacitación realmente mejoró el rendimiento.</div></li>
+                        </ul>
+                    </div>
+                    <div class="compare-box box-new reveal-up delay-200">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--c-teal);">AI-Driven LMS (Nosotros)</h3>
+                        <p style="font-size: 0.9rem;">Agilidad, retención y métricas en tiempo real.</p>
+                        <ul class="compare-list">
+                            <li><i class="fa-solid fa-check text-green"></i> <div><strong>Express:</strong> Creación automatizada de contenido base mediante agentes de IA.</div></li>
+                            <li><i class="fa-solid fa-check text-green"></i> <div><strong>Microlearning:</strong> UX moderna y móvil, diseñada para mantener la atención.</div></li>
+                            <li><i class="fa-solid fa-check text-green"></i> <div><strong>Data Predictiva:</strong> Dashboards instantáneos con el ROI de capacitación para directivos.</div></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-number">03 / 06</div>
+            </div>
+        </section>
+
+        <!-- Slide 4 -->
+        <section class="slide" id="slide4">
+            <div class="glass-card">
+                <h2 class="slide-title reveal-up">El Modelo: <span class="highlight-teal">Ingreso Escalable</span></h2>
+                <div class="content-flex grid-2">
+                    <div class="big-number-block reveal-up delay-100">
+                        <div class="big-number">$100k</div>
+                        <div class="big-label">Ticket Anual Promedio (USD)</div>
+                        <p style="margin-top: 1rem; font-size: 1rem;">en el segmento Enterprise.</p>
+                    </div>
+                    <div>
+                        <div style="margin-bottom: 2rem;" class="reveal-up delay-200">
+                            <h3 style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
+                                <i class="fa-solid fa-bolt text-rose" style="color: var(--c-rose);"></i> Setup Premium (Gancho)
+                            </h3>
+                            <p>Cobro inicial alto por personalizar la plataforma (White-label) y migrar sus primeros cursos clave usando tu expertise. Genera caja rápida y confianza.</p>
+                        </div>
+                        <div class="reveal-up delay-300">
+                            <h3 style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
+                                <i class="fa-solid fa-infinity text-teal" style="color: var(--c-teal);"></i> SaaS Recurrente (El Grueso)
+                            </h3>
+                            <p>Licenciamiento anual por el uso de la tecnología. Atender a 10 clientes corporativos requiere el mismo esfuerzo técnico fundacional que atender a 1, destrabando la escala.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">04 / 06</div>
+            </div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide" id="slide5">
+            <div class="glass-card">
+                <h2 class="slide-title reveal-up">Nuestra Ventaja: <span class="highlight">Vibecoding</span></h2>
+                <div class="content-flex grid-2">
+                    <div class="reveal-up delay-100">
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Construir a costo casi cero.</h3>
+                        <p style="margin-bottom: 1.5rem;">Tradicionalmente, levantar un LMS corporativo requería rondas de inversión y meses de trabajo de un equipo de ingenieros.</p>
+                        <p>Hoy, utilizando el desarrollo asistido por IA avanzada (Vibecoding), <strong>puedo iterar la arquitectura y programar la plataforma en tiempo récord</strong>. No necesitamos pagar programadores externos; yo asumo la ejecución tecnológica mientras tú defines la calidad del producto comercial.</p>
+                    </div>
+                    <div class="reveal-up delay-200" style="background: rgba(255,255,255,0.4); border-radius: 24px; padding: 2rem; border: 1px solid rgba(255,255,255,0.6);">
+                        <ul class="compare-list" style="margin-top: 0;">
+                            <li><i class="fa-solid fa-code-branch" style="color: var(--c-blue);"></i> <div><strong>Iteración Ágil:</strong> Cambios en la plataforma solicitados por clientes implementados en horas.</div></li>
+                            <li><i class="fa-solid fa-server" style="color: var(--c-teal);"></i> <div><strong>Cloud Económico:</strong> Costos iniciales de servidores por debajo de $150 USD/mes.</div></li>
+                            <li><i class="fa-solid fa-brain" style="color: var(--c-rose);"></i> <div><strong>APIs Nativas:</strong> LLMs integrados desde el día 1, algo que Moodle o SAP no pueden adaptar rápido.</div></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-number">05 / 06</div>
+            </div>
+        </section>
+
+        <!-- Slide 6 -->
+        <section class="slide" id="slide6">
+            <div class="glass-card">
+                <h2 class="slide-title reveal-up">Roadmap a <span class="highlight-teal">90 Días</span></h2>
+                <div class="content-flex">
+                    <div class="roadmap-container">
+                        <div class="roadmap-line reveal-up"></div>
+                        <div class="roadmap-step reveal-up delay-100">
+                            <div class="step-dot">1</div>
+                            <h3>Mes 1: El Prototipo</h3>
+                            <p>Definimos requerimientos y construyo el MVP funcional enfocado en la generación de cursos con IA y la interfaz de usuario.</p>
+                        </div>
+                        <div class="roadmap-step reveal-up delay-200">
+                            <div class="step-dot">2</div>
+                            <h3>Mes 2: El Piloto Cero Costo</h3>
+                            <p>Buscamos una empresa en tu red de contactos y les ofrecemos digitalizar su proceso de *Onboarding* gratis para auditar el sistema y crear un caso de éxito.</p>
+                        </div>
+                        <div class="roadmap-step reveal-up delay-300">
+                            <div class="step-dot">3</div>
+                            <h3>Mes 3: Caza Mayor</h3>
+                            <p>Con data real de retención y éxito, armamos la oferta comercial para buscar nuestros primeros contratos B2B recurrentes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="reveal-up delay-400" style="text-align: center; margin-top: 4rem;">
+                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="background: var(--c-text-main); color: #FFF; padding: 1rem 2.5rem; border: none; border-radius: 99px; font-size: 1.125rem; font-weight: 600; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+                            Volver al inicio <i class="fa-solid fa-arrow-up" style="margin-left: 8px; font-size: 0.9rem;"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="slide-number">06 / 06</div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script para activar las animaciones al hacer scroll -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Agrega la clase in-view cuando la diapositiva entra en pantalla
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, { 
+                threshold: 0.3 // Se activa cuando el 30% de la diapositiva es visible
+            });
+
+            // Observar todas las secciones de diapositivas
+            document.querySelectorAll('.slide').forEach(slide => {
+                observer.observe(slide);
+            });
+        });
+    </script>
+</body>
+</html>
